@@ -71,7 +71,7 @@ class DashboardController extends Controller
             
             // Requisições por hora (últimas 24h)
             'requests_per_hour' => ApiRequestLog::select(
-                DB::raw("strftime('%Y-%m-%d %H:00', created_at) as hour"),
+                DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:00') as hour"),
                 DB::raw('count(*) as total')
             )
                 ->where('created_at', '>=', $last24Hours)

@@ -138,7 +138,7 @@ class LibraryVersionController extends Controller
         // Cache por 15 minutos para reduzir carga no banco
         $cacheKey = $this->getCacheKey($cnpj, $machineName, $system);
         
-        $libraries = Cache::remember($cacheKey, now()->addMinutes(15), function () use ($cnpj, $machineName, $system) {
+        $libraries = Cache::remember($cacheKey, now()->addMinutes(60), function () use ($cnpj, $machineName, $system) {
             return Library::active()
                 ->where('system', $system)
                 ->get()
